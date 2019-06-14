@@ -7,7 +7,7 @@ public class ActionShowAnimation : ActionTrigger
     public override void DoAction()
     {
         base.DoAction();
-
+        Debug.Log("Action");
         if (ActionAnimation)
         {
             ActionAnimation.Play();

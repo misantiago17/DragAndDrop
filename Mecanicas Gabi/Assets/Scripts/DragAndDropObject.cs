@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent((typeof(ActionTrigger)))]
 public class DragAndDropObject : MonoBehaviour
 {
     [HideInInspector] public bool dragging = false;
@@ -35,5 +36,33 @@ public class DragAndDropObject : MonoBehaviour
             Vector3 rayPoint = ray.GetPoint(distance);
             transform.position = rayPoint;
         }
+    }
+
+    // do action trigger when user let go object
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject == this.GetComponent<ActionTrigger>().triggerObject)
+        {
+            if (!dragging)
+            {
+                this.gameObject.GetComponent<ActionTrigger>().DoAction();
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject == this.GetComponent<ActionTrigger>().triggerObject)
+        {
+            if (!dragging)
+            {
+                this.gameObject.GetComponent<ActionTrigger>().DoAction();
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        
     }
 }
